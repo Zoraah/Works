@@ -12,6 +12,10 @@ public class CarController : MonoBehaviour
     [SerializeField]
     private float TurnSpeed;
 
+    private float CurrentSpeed=1;
+    private float MaxSpeed=60;
+    private Vector3 Moving;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -37,8 +41,19 @@ public class CarController : MonoBehaviour
     }
     private void Move()
     {
-        Vector3 move = transform.forward * MoveSpeed * Input.GetAxis("Vertical") * Time.deltaTime;
-        rb.MovePosition(rb.position+move);
+        if (Input.GetAxis("Vertical") > 0)
+        {
+            CurrentSpeed += MoveSpeed * Input.GetAxis("Vertical");
+        }
+        else
+        {
+            if (Input.GetAxis("Vertical") == 0 && CurrentSpeed>0)
+            {
+                CurrentSpeed -= MoveSpeed;
+            }
+        }
+        Moving = transform.forward * CurrentSpeed * Time.deltaTime;
+        rb.MovePosition(rb.position + Moving);
     }
     private void Turn()
     {
