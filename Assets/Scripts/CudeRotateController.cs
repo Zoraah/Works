@@ -5,36 +5,33 @@ using System.Threading;
 
 public class CudeRotateController : MonoBehaviour
 {
-    public float RPM;
-    public float Count = 0;
-    public float RotatePerSecond;
+    private float _rotatePerMinute;
+    private float _count = 0;
+    private float _rotatePerSecond;
 
-    Vector3 currentEulerAngles;
-    Quaternion currentRotation;
+    private Vector3 _currentEulerAngles;
+    private Quaternion _currentRotation;
 
-    private bool minus = false; 
+    private bool _minus = false; 
 
-    void Start()
+    private void Start()
     {
-        RotatePerSecond = RPM/60*360;
+        _rotatePerSecond = _rotatePerMinute/60*360;
     }
-    void Update()
+    private void Update()
     {
         Debug.Log(Time.time);
-        currentEulerAngles += new Vector3(0f, 1f, 0f) * Time.deltaTime * RotatePerSecond;
-        currentRotation.eulerAngles = currentEulerAngles;
-        transform.rotation = currentRotation;
-    }
-    void FixedUpdate()
-    {
-        if(!minus && transform.rotation.y<0f)
+        _currentEulerAngles += new Vector3(0f, 1f, 0f) * Time.deltaTime * _rotatePerSecond;
+        _currentRotation.eulerAngles = _currentEulerAngles;
+        transform.rotation = _currentRotation;
+        if (!_minus && transform.rotation.y < 0f)
         {
-            minus = true;
+            _minus = true;
         }
-        if(minus && transform.rotation.y>0f)
+        if (_minus && transform.rotation.y > 0f)
         {
-            minus = false;
-            Count+=2;
+            _minus = false;
+            _count += 2;
         }
     }
 }

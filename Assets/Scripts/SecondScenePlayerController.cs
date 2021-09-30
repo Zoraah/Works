@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class SecondScenePlayerController : MonoBehaviour
 {
-    private float moveSpeed = 3f;
-    private Rigidbody rb;
-    // Start is called before the first frame update
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
+    private float _moveSpeed = 3f;
+    private Rigidbody _rb;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        float hMove = Input.GetAxis("Horizontal");
-        float vMove = Input.GetAxis("Vertical");
-        Vector3 move = new Vector3(hMove, 0f, vMove);
-        move.Normalize();
-        rb.MovePosition(rb.position + move * moveSpeed * Time.deltaTime);
+        _rb = GetComponent<Rigidbody>();
+    }
+    private void Update()
+    { 
+        float _hMove = Input.GetAxis("Horizontal");
+        float _vMove = Input.GetAxis("Vertical");
+        Vector3 _move = new Vector3(_hMove, 0f, _vMove);
+        _move.Normalize();
+        _rb.MovePosition(_rb.position + _move * _moveSpeed * Time.deltaTime);
     }
 }
