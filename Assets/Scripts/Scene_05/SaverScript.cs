@@ -6,6 +6,20 @@ public class SaverScript : MonoBehaviour
 {
     [SerializeField]
     private int Count;
+
+    private void Start()
+    {
+        ShowDataPath();
+    }
+    private void Update()
+    {
+        Counter();
+        PrefsController();
+    }
+    private void ShowDataPath()
+    {
+        Debug.Log(Application.persistentDataPath);
+    }
     private void SavePrefs()
     {
         PlayerPrefs.SetInt("Count", Count);
@@ -61,10 +75,5 @@ public class SaverScript : MonoBehaviour
         {
             DeletePrefs();
         }
-    }
-    private void Update()
-    {
-        Counter();
-        PrefsController();
     }
 }
