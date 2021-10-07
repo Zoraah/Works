@@ -5,15 +5,13 @@ using UnityEngine.Events;
 
 public class PlayerScript : MonoBehaviour
 {
-    public delegate void CastSkillCallback(string message);
-    private event CastSkillCallback CastFirstSkillDebugEvent;
-    public event CastSkillCallback CastSecondDebugEvent;
-
     [SerializeField]
     private UnityEvent VisualCastSkillEvent;
+
+    public delegate void CastSkillCallback(string message);
+    public event CastSkillCallback CastSecondDebugEvent;
+    private event CastSkillCallback CastFirstSkillDebugEvent;
     
-    [SerializeField]
-    private GameObject _bullet;
     private void Start()
     {
         CastFirstSkillDebugEvent += Debug.Log;
@@ -22,7 +20,7 @@ public class PlayerScript : MonoBehaviour
     {
         PlayerControl();
     }
-    private void PlayerControl()
+    protected void PlayerControl()
     {
         if(Input.GetKeyDown(KeyCode.Q))
         {
